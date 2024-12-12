@@ -1,6 +1,8 @@
+import CustomButton from "@/components/CustomButton"
+import { onboarding } from "@/constants"
 import { router } from "expo-router"
 import { useRef, useState } from "react"
-import { Text, TouchableOpacity, View } from "react-native"
+import { Text, TouchableOpacity, View, Image } from "react-native"
 import { SafeAreaView } from "react-native-safe-area-context"
 
 import Swiper from "react-native-swiper"
@@ -29,8 +31,20 @@ const OnBoarding = () => {
                 }
                 onIndexChanged={ (index) => setActiveIndex(index) }
                 >
-                    <Text>1 - 2</Text>
+                    { onboarding.map( (item) => (
+                        <View
+                        className="flex items-center justify-center p-5"
+                        key={item.id}>
+                            <Image source={item.image} className="w-full h-[350px]"/>
+                            <View className="flex flex-row items-center justify-center w-full mt-10">
+                                <Text className="text-black text-3xl font-bold mx-10 text-center">{item.title}</Text>
+                            </View>
+                            <Text className="text-lg font-JakartaSemiBold text-center text-[#858585] mx-10 mt-3">{item.description}</Text>
+                        </View>
+                    ))}
                 </Swiper>
+
+                <CustomButton title="Next" className="w-11/12 mt-10"/>
         </SafeAreaView>
     )
 }
